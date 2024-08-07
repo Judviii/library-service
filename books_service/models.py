@@ -1,4 +1,6 @@
+from decimal import Decimal
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class Book(models.Model):
@@ -17,11 +19,12 @@ class Book(models.Model):
     daily_fee = models.DecimalField(
         max_digits=7,
         decimal_places=2,
+        validators=[MinValueValidator(Decimal("0.01"))],
         verbose_name="Daily fee (in $USD)",
     )
 
     def __str__(self):
-        return f"{self.title}, {self.author}"
+        return f"{self.title}, {self.author}. Daily fee: {self.daily_fee}$"
 
     class Meta:
         unique_together = ("title", "author", "cover")

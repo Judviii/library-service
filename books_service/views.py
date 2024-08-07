@@ -1,9 +1,7 @@
 from rest_framework import viewsets
 
 from books_service.models import Book
-from books_service.serializers import (
-    BookSerializer, BookListSerializer
-)
+from books_service.serializers import BookSerializer, BookListSerializer
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -14,4 +12,3 @@ class BookViewSet(viewsets.ModelViewSet):
         if self.action == "list":
             return BookListSerializer
         return BookSerializer
-

@@ -8,6 +8,7 @@ from borrowings_service.serializers import (
 class BorrowingViewSet(
     mixins.RetrieveModelMixin,
     mixins.ListModelMixin,
+    mixins.CreateModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = Borrowing.objects.all()
@@ -17,3 +18,6 @@ class BorrowingViewSet(
         if self.action == "retrieve":
             return BorrowingDetailSerializer
         return BorrowingSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

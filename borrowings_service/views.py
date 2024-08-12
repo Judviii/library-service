@@ -3,6 +3,9 @@ from borrowings_service.models import Borrowing
 from borrowings_service.serializers import (
     BorrowingSerializer, BorrowingDetailSerializer
 )
+from borrowings_service.helpers.telegrambot import (
+    send_message, get_message
+)
 
 
 class BorrowingViewSet(
@@ -20,4 +23,6 @@ class BorrowingViewSet(
         return BorrowingSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        borrowing = serializer.save(user=self.request.user)
+        message = get_message(borrowing)
+        send_message(message)

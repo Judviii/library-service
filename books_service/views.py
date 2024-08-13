@@ -23,4 +23,3 @@ class BookViewSet(viewsets.ModelViewSet):
             permission_classes = [AllowAny, ]
 
         return [permission() for permission in permission_classes]
-

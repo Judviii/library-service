@@ -40,6 +40,7 @@ class PaymentViewSet(
         permission_classes=[IsAuthenticated],
     )
     def create_checkout_session(self, request, pk=None):
+        """Endpoint for getting session_id and session_url"""
         domain_url = "http://localhost:8000/api/payments/"
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url,

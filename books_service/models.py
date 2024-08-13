@@ -9,7 +9,7 @@ class Book(models.Model):
         HARD = "HARD", "Hard"
 
     title = models.CharField(max_length=255, unique=True)
-    author = models.CharField(max_length=64, unique=True)
+    author = models.CharField(max_length=64)
     cover = models.CharField(
         max_length=4,
         choices=CoverChoices.choices,
